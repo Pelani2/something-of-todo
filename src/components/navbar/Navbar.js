@@ -1,25 +1,34 @@
 import React from "react";
 import "../navbar/NavbarStyles.css";
 import LoginAndSignupButton from "../buttons/login-and-signup/LoginAndSignupButton";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
     return(
-        <nav>
-            <ul>
+        <nav className="navbar">
+            <ul className="navbar__links">
                 <li>
-                    Home    
+                    <Link to="/">
+                        Home
+                    </Link>  
                 </li>
                 <li>
-                    About
+                    <Link to="/contactpage" >
+                        Contact
+                    </Link>
                 </li>
                 <li>
-                    Services
+                    <Link to="/servicespage" >
+                        Services
+                    </Link>     
                 </li>
                 <li>
-                    Contact
+                    <Link to="/aboutpage" >
+                        About
+                    </Link>
                 </li>
             </ul>
-            <div>
+            <div className="navbar__buttons">
                 <LoginAndSignupButton text="Log In" />
                 <LoginAndSignupButton text="Sign Up" />
             </div>
