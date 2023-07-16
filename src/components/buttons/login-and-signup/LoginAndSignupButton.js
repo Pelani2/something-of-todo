@@ -1,10 +1,11 @@
 import React from "react";
+import "./LoginAndSignupButton.css";
 
 export default function LoginAndSignupButton({
     text
 }) {
     return(
-        <button>
+        <button className="login-signup-button" >
             {text}
         </button>
     )
