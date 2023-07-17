@@ -14,6 +14,23 @@ export default function Calculator() {
         setDisplayValue("0");
     }
 
+    const handleEqualClick = () => {
+        const newExpression = expression + displayValue;
+        try {
+            // evaluate the expression
+            const result = eval(newExpression);
+            setDisplayValue(result.toString());
+            setExpression("");
+        } catch (error) {
+            console.error("Invalid expression");
+        }
+    }
+
+    const handleClearClick = () => {
+        setDisplayValue("0");
+        setExpression("");
+    }
+
     return(
         <div className="calculator-container">
 
