@@ -22,10 +22,10 @@ export default function ValueConverter() {
     const convertCurrency = (amount, from, to) => {
         const conversionRates = {
             EUR: {
-                USD: 1.18, RSD: 117.38
+                USD: 1.18, RSD: 117.2232
             },
             USD: {
-                EUR: 0.85, RSD: 99.61
+                EUR: 0.85, RSD: 104.3950
             },
             RSD: {
                 EUR: 0.0085, USD: 0.01
@@ -44,7 +44,7 @@ export default function ValueConverter() {
 
     return(
         <div className="value-converter">
-            <h2>
+            <h2 className="value-converter__title">
                 Value Converter
             </h2>
             <div className="value-converter__container">
@@ -53,10 +53,12 @@ export default function ValueConverter() {
                     value={inputValue}
                     onChange={handleInputChange}
                     placeholder="Enter value"
+                    className="container__input"
                 />
                 <select
                     value={fromCurrency}
                     onChange={handleFromCurrencyChange}
+                    className="container__select"
                 >
                     <option value="EUR"> 
                         EUR
@@ -74,6 +76,7 @@ export default function ValueConverter() {
                 <select 
                     value={toCurrency}
                     onChange={handleToCurrencyChange}
+                    className="container__select"
                 >
                     <option value="EUR">
                         EUR
@@ -85,12 +88,15 @@ export default function ValueConverter() {
                         RSD
                     </option>
                 </select>
-                <button onClick={handleConvertClick}>
+                <button 
+                    onClick={handleConvertClick}
+                    className="container__converter-button"
+                >
                     Convert
                 </button>
             </div>
             {convertedValue && (
-                <p>
+                <p className="container__converted-value" >
                     Converted Value: {convertedValue} {toCurrency}
                 </p>
             )}
