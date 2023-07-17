@@ -18,10 +18,13 @@ export default function Calculator() {
     const handleEqualClick = () => {
         const newExpression = expression + displayValue;
         try {
-            // evaluate the expression
             const result = eval(newExpression);
-            setDisplayValue(result.toString());
-            setExpression("");
+            if (result !== undefined) {
+                setDisplayValue(result.toString());
+                setExpression("");
+            } else {
+                console.error("Invalid expression");
+            }
         } catch (error) {
             console.error("Invalid expression");
         }
@@ -32,107 +35,99 @@ export default function Calculator() {
         setExpression("");
     }
 
-    const handleKeyPress = (event) => {
+    const handleKeyDown = (event) => {
         const key = event.key;
-        const operators = [
-            "=", "-", "*", "/"
-        ];
-        const digits = [
-            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
-        ];
 
-        if (operators.includes(key)) {
-            handleOperatorClick(key);
-        } else if (digits.includes(key)) {
+        if (!isNaN(key) || key === ".") {
             handleDigitClick(key);
-        } else if (key === "=" || key === "Enter") {
+        } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+            handleOperatorClick(key);
+        } else if (key === "Enter") {
             handleEqualClick();
         } else if (key === "c" || key === "C") {
             handleClearClick();
-        } else if (key === "+" || key === "-") {
-            handleOperatorClick(key);
         }
-    }
+    };
 
     useEffect(() => {
-        window.addEventListener("keydown", handleKeyPress);
+        window.addEventListener("keydown", handleKeyDown);
         return () => {
-            window.removeEventListener("keydown", handleKeyPress);
+            window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [])
+    }, []);
 
     return(
         <div className="calculator-container">
             <div className="calculator-frame">
-            <div className="calculator-display">
-                {displayValue}
-            </div>
+                <div className="calculator-display">
+                    {displayValue}
+                </div>
 
-            <div className="calculator-buttons">
-                <OperatingButton 
-                    oprClickFunc={() => handleDigitClick("7")}
-                    text="7"
+                <div className="calculator-buttons">
+                    <OperatingButton 
+                        oprClickFunc={() => handleDigitClick("7")}
+                        text="7"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleDigitClick("8")}
+                        text="8"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleDigitClick("9")}
+                        text="9"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleOperatorClick("+")}
+                        text="+"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleDigitClick("4")}
+                        text="4"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleDigitClick("5")}
+                        text="5"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleDigitClick("6")}
+                        text="6"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleOperatorClick("-")}
+                        text="-"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleDigitClick("1")}
+                        text="1"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleDigitClick("2")}
+                        text="2"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleDigitClick("3")}
+                        text="3"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleOperatorClick("*")}
+                        text="*"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleDigitClick("0")}
+                        text="0"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={() => handleOperatorClick("/")}
+                        text="/"
+                        />
+                    <OperatingButton 
+                        oprClickFunc={handleEqualClick}
+                        text="="
+                        />
+                    <OperatingButton 
+                        oprClickFunc={handleClearClick}
+                        text="C"
                     />
-                <OperatingButton 
-                    oprClickFunc={() => handleDigitClick("8")}
-                    text="8"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleDigitClick("9")}
-                    text="9"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleOperatorClick("+")}
-                    text="+"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleDigitClick("4")}
-                    text="4"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleDigitClick("5")}
-                    text="5"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleDigitClick("6")}
-                    text="6"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleOperatorClick("-")}
-                    text="-"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleDigitClick("1")}
-                    text="1"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleDigitClick("2")}
-                    text="2"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleDigitClick("3")}
-                    text="3"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleOperatorClick("*")}
-                    text="*"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleDigitClick("0")}
-                    text="0"
-                    />
-                <OperatingButton 
-                    oprClickFunc={() => handleOperatorClick("/")}
-                    text="/"
-                    />
-                <OperatingButton 
-                    oprClickFunc={handleEqualClick}
-                    text="="
-                    />
-                <OperatingButton 
-                    oprClickFunc={handleClearClick}
-                    text="C"
-                />
                 </div>
             </div>
         </div>
