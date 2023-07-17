@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CalculatorStyles.css";
 import OperatingButton from "../../components/buttons/operating-button/OperatingButton";
 
@@ -39,7 +39,7 @@ export default function Calculator() {
         ];
         const digits = [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
-        ]
+        ];
 
         if (operators.includes(key)) {
             handleOperatorClick(key);
@@ -49,8 +49,17 @@ export default function Calculator() {
             handleEqualClick();
         } else if (key === "c" || key === "C") {
             handleClearClick();
+        } else if (key === "+" || key === "-") {
+            handleOperatorClick(key);
         }
     }
+
+    useEffect(() => {
+        window.addEventListener("keydown", handleKeyPress);
+        return () => {
+            window.removeEventListener("keydown", handleKeyPress);
+        };
+    }, [])
 
     return(
         <div className="calculator-container">
