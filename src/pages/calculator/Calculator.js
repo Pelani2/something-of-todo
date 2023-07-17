@@ -1,24 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./CalculatorStyles.css";
 import OperatingButton from "../../components/buttons/operating-button/OperatingButton";
+import { evaluate } from "mathjs";
 
 export default function Calculator() {
     const [displayValue, setDisplayValue] = useState("0");
     const [expression, setExpression] = useState("");
+    const displayRef = useRef(null);
 
     const handleDigitClick = (digit) => {
         setDisplayValue((prevDisplayValue) => prevDisplayValue === "0" ? digit : prevDisplayValue + digit);
     }
 
     const handleOperatorClick = (operator) => {
-        setExpression((prevExpression) => prevExpression + displayValue + operator);
-        setDisplayValue("0");
+        if (displayValue !== "0") {
+            setExpression((prevExpression) => prevExpression + displayValue + operator);
+            setDisplayValue("0");
+        } else if (expression !== "") {
+            setExpression((prevExpression) => prevExpression.slice(0, 1) + operator);
+        }
     }
 
     const handleEqualClick = () => {
-        const newExpression = expression + displayValue;
         try {
-            const result = eval(newExpression);
+            const newExpression = expression + displayValue;
+            const result = evaluate(newExpression);
             if (result !== undefined) {
                 setDisplayValue(result.toString());
                 setExpression("");
@@ -35,31 +41,15 @@ export default function Calculator() {
         setExpression("");
     }
 
-    const handleKeyDown = (event) => {
-        const key = event.key;
-
-        if (!isNaN(key) || key === ".") {
-            handleDigitClick(key);
-        } else if (key === "+" || key === "-" || key === "*" || key === "/") {
-            handleOperatorClick(key);
-        } else if (key === "Enter") {
-            handleEqualClick();
-        } else if (key === "c" || key === "C") {
-            handleClearClick();
-        }
-    };
-
-    useEffect(() => {
-        window.addEventListener("keydown", handleKeyDown);
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-        };
-    }, []);
-
     return(
         <div className="calculator-container">
             <div className="calculator-frame">
-                <div className="calculator-display">
+
+                <div 
+                    className="calculator-display"
+                    tabIndex={0}
+                    ref={displayRef}
+                >
                     {displayValue}
                 </div>
 
