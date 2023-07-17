@@ -33,7 +33,13 @@ export default function Calculator() {
 
     return(
         <div className="calculator-container">
+            <div className="calculator-display">
+                {displayValue}
+            </div>
 
+            <div className="calculator-buttons">
+                
+            </div>
         </div>
     );
 }
