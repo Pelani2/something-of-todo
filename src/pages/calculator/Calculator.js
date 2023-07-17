@@ -32,6 +32,26 @@ export default function Calculator() {
         setExpression("");
     }
 
+    const handleKeyPress = (event) => {
+        const key = event.key;
+        const operators = [
+            "=", "-", "*", "/"
+        ];
+        const digits = [
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+        ]
+
+        if (operators.includes(key)) {
+            handleOperatorClick(key);
+        } else if (digits.includes(key)) {
+            handleDigitClick(key);
+        } else if (key === "=" || key === "Enter") {
+            handleEqualClick();
+        } else if (key === "c" || key === "C") {
+            handleClearClick();
+        }
+    }
+
     return(
         <div className="calculator-container">
             <div className="calculator-frame">
