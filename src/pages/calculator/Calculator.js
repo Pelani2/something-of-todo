@@ -34,6 +34,7 @@ export default function Calculator() {
 
     return(
         <div className="calculator-container">
+            <div className="calculator-frame">
             <div className="calculator-display">
                 {displayValue}
             </div>
@@ -42,67 +43,68 @@ export default function Calculator() {
                 <OperatingButton 
                     oprClickFunc={() => handleDigitClick("7")}
                     text="7"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleDigitClick("8")}
                     text="8"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleDigitClick("9")}
                     text="9"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleOperatorClick("+")}
                     text="+"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleDigitClick("4")}
                     text="4"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleDigitClick("5")}
                     text="5"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleDigitClick("6")}
                     text="6"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleOperatorClick("-")}
                     text="-"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleDigitClick("1")}
                     text="1"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleDigitClick("2")}
                     text="2"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleDigitClick("3")}
                     text="3"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleOperatorClick("*")}
                     text="*"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleDigitClick("0")}
                     text="0"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={() => handleOperatorClick("/")}
                     text="/"
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={handleEqualClick}
                     text="="
-                />
+                    />
                 <OperatingButton 
                     oprClickFunc={handleClearClick}
                     text="C"
                 />
+                </div>
             </div>
         </div>
     );
