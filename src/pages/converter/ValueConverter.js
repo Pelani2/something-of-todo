@@ -6,10 +6,19 @@ export default function ValueConverter() {
     const [fromCurrency, setFromCurrency] = useState("EUR");
     const [toCurrency, setToCurrency] = useState("USD");
     const [convertedValue, setConvertedValue] = useState("");
-    const [currencyValues, setCurrencyValues] = useState({
-        EUR: 1, 
-        USD: 1.18,
-        RSD: 117.2232,
+    const [conversionRates, setConversionRates] = useState({
+        EUR: {
+            USD: 1.18, 
+            RSD: 117.2232
+        },
+        USD: {
+            EUR: 0.85,
+            RSD: 104.3950,
+        },
+        RSD: {
+            EUR: 0.0085,
+            USD: 0.01
+        },
     });
 
     const handleInputChange = (event) => {
@@ -25,18 +34,6 @@ export default function ValueConverter() {
     };
 
     const convertCurrency = (amount, from, to) => {
-        const conversionRates = {
-            EUR: {
-                USD: 1.18, RSD: 117.2232
-            },
-            USD: {
-                EUR: 0.85, RSD: 104.3950
-            },
-            RSD: {
-                EUR: 0.0085, USD: 0.01
-            },
-        };
-
         const convertedAmount = amount * conversionRates[from][to];
         return convertedAmount;
     };
@@ -46,14 +43,6 @@ export default function ValueConverter() {
         const convertedAmount = convertCurrency(inputValue, fromCurrency, toCurrency);
         setConvertedValue(convertedAmount.toFixed(2));
     }
-
-    const handleCurrencyValueChange = (event, currency) => {
-        const newCurrencyValues = {
-            ...currencyValues,
-            [currency]: Number(event.target.value)
-        };
-        setCurrencyValues(newCurrencyValues);
-    };
 
     return(
         <div className="value-converter">
@@ -113,6 +102,45 @@ export default function ValueConverter() {
                     Converted Value: {convertedValue} {toCurrency}
                 </p>
             )}
+            <div className="conversion-rates">
+                <h3 className="conversion-rates__title">
+                    Conversion Rates
+                </h3>
+                <table className="conversion-rates__table">
+                    <thead>
+                        <tr>
+                            <th>
+                                From
+                            </th>
+                            <th>
+                                To
+                            </th>
+                            <th>
+                                Rate
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Object.entries(conversionRates).map(([from, rates]) => (
+                            <React.Fragment key={from}>
+                                {Object.entries(rates).map(([to, rate]) => (
+                                    <tr key={`${from}-${to}`}>
+                                        <td>
+                                            {from}
+                                        </td>
+                                        <td>
+                                            {to}
+                                        </td>
+                                        <td>
+                                            {rate}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </React.Fragment>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
