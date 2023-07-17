@@ -6,6 +6,11 @@ export default function ValueConverter() {
     const [fromCurrency, setFromCurrency] = useState("EUR");
     const [toCurrency, setToCurrency] = useState("USD");
     const [convertedValue, setConvertedValue] = useState("");
+    const [currencyValues, setCurrencyValues] = useState({
+        EUR: 1, 
+        USD: 1.18,
+        RSD: 117.2232,
+    });
 
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
@@ -41,6 +46,14 @@ export default function ValueConverter() {
         const convertedAmount = convertCurrency(inputValue, fromCurrency, toCurrency);
         setConvertedValue(convertedAmount.toFixed(2));
     }
+
+    const handleCurrencyValueChange = (event, currency) => {
+        const newCurrencyValues = {
+            ...currencyValues,
+            [currency]: Number(event.target.value)
+        };
+        setCurrencyValues(newCurrencyValues);
+    };
 
     return(
         <div className="value-converter">
