@@ -34,7 +34,7 @@ export default function ValueConverter() {
 
         const convertedAmount = amount * conversionRates[from][to];
         return convertedAmount;
-    }
+    };
 
     const handleConvertClick = () => {
         // convert the value based on the selected currencies
@@ -43,8 +43,57 @@ export default function ValueConverter() {
     }
 
     return(
-        <div>
-            
+        <div className="value-converter">
+            <h2>
+                Value Converter
+            </h2>
+            <div className="value-converter__container">
+                <input 
+                    type="number"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    placeholder="Enter value"
+                />
+                <select
+                    value={fromCurrency}
+                    onChange={handleFromCurrencyChange}
+                >
+                    <option value="EUR"> 
+                        EUR
+                    </option>
+                    <option value="USD">
+                        USD
+                    </option>
+                    <option value="RSD">
+                        RSD
+                    </option>
+                </select>
+                <span className="container__arrow">
+                    &#x2192;
+                </span>
+                <select 
+                    value={toCurrency}
+                    onChange={handleToCurrencyChange}
+                >
+                    <option value="EUR">
+                        EUR
+                    </option>
+                    <option value="USD">
+                        USD
+                    </option>
+                    <option value="RSD">
+                        RSD
+                    </option>
+                </select>
+                <button onClick={handleConvertClick}>
+                    Convert
+                </button>
+            </div>
+            {convertedValue && (
+                <p>
+                    Converted Value: {convertedValue} {toCurrency}
+                </p>
+            )}
         </div>
     );
 }
