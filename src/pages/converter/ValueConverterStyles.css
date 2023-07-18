@@ -58,3 +58,40 @@
     margin-top: 20px;
     font-size: 18px;
 }
+
+.conversion-rates {
+    background-color: black;
+    color: yellow;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.conversion-rates__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.conversion-rates__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.conversion-rates__table th,
+.conversion-rates__table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid yellow;
+}
+
+.conversion-rates__table th {
+    background-color: red;
+}
+
+.conversion-rates__table td {
+    background-color: black;
+    color: yellow;
+}
+
+.conversion-rates__table td:first-child {
+    font-weight: bold;
+}
