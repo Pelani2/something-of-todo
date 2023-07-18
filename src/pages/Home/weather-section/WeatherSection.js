@@ -53,7 +53,7 @@ export default function WeatherSection() {
         }
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetchWeatherData();
     }, []);
 
