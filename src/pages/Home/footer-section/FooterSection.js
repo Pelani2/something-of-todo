@@ -25,13 +25,22 @@ export default function FooterSection() {
                 </h3>
                 <div className="footer-section__social-links">
                     <a href="https://www.facebook.com">
-                        
+                        <img 
+                            src={Facebook}
+                            alt="facebook"
+                        />
                     </a>
                     <a href="https://www.instagram.com">
-                        
+                        <img 
+                            src={Instagram}
+                            alt="instagram"
+                        />
                     </a>
                     <a href="https://www.twitter.com">
-                        
+                        <img 
+                            src={Twitter}
+                            alt="twitter"
+                        />
                     </a>
                 </div>
             </div>
