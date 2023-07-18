@@ -114,11 +114,11 @@ export default function WeatherSection() {
                 )}
             </div>
             <div className="weather-section__divider">
-                <h3 className="weather-section__title">
+                <h3 className="divider__title">
                     Daily
                 </h3>
                 {dailyWeatherData ? (
-                    <div>
+                    <div className="divider__weather-info">
                         <p>
                             Sunrise: {formatTime(dailyWeatherData.daily.sunrise[0])}
                         </p>
